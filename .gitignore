@@ -1,0 +1,15 @@
+# Local generated files and editor/system state
+.DS_Store
+**/__pycache__/
+**/*.py[cod]
+**/.venv/
+**/.pio/
+**/.vscode/
+
+# Unity-generated caches and builds
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Ll]ogs/
+**/[Uu]ser[Ss]ettings/
+**/[Bb]uild/
+**/[Bb]uilds/
