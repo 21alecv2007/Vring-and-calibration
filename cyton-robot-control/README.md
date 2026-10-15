@@ -12,8 +12,12 @@ calibration workflow.
 Start the desktop application from this folder:
 
 ```bash
+bash setup_calibration.sh
 bash outputs/vring_cyton_control/launch_vring_gui.sh
 ```
+
+`setup_calibration.sh` only needs to be run once per computer. It creates the
+local Python environment and installs `bleak` and `pyserial`.
 
 Use the individual READMEs for the wiring and firmware-flashing steps. The
 gateway disables servo torque at boot; always confirm the arm is clear before

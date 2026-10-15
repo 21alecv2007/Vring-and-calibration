@@ -32,6 +32,7 @@ M5 GND -----------------------------------------+---- Uno/shield GND
 
 ```bash
 # From cyton-robot-control root:
+bash setup_calibration.sh  # first time only
 outputs/vring_cyton_control/launch_vring_gui.sh
 ```
 

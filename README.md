@@ -14,12 +14,14 @@ needed to calibrate a VRing 2 IMU using a Robai Cyton arm.
 
 ```bash
 cd cyton-robot-control
+bash setup_calibration.sh
 bash outputs/vring_cyton_control/launch_vring_gui.sh
 ```
 
-The GUI connects to the arm over the M5 USB serial bridge and to the ring over
-Bluetooth LE. See the calibration GUI README for wiring, setup, and safety
-notes.
+Run the setup command once on a new computer. It creates a local `.venv` and
+installs the required Python packages. The GUI connects to the arm over the M5
+USB serial bridge and to the ring over Bluetooth LE. See the calibration GUI
+README for wiring and safety notes.
 
 ## Safety
 
