@@ -23,6 +23,18 @@ installs the required Python packages. The GUI connects to the arm over the M5
 USB serial bridge and to the ring over Bluetooth LE. See the calibration GUI
 README for wiring and safety notes.
 
+## Reflash the M5 bridge
+
+Connect the M5StickC Plus by USB, then run this from `cyton-robot-control`:
+
+```bash
+bash flash_m5_bridge.sh
+```
+
+The script installs PlatformIO in the local `.venv` if necessary and uploads
+the bridge firmware. If more than one serial device is connected, give the M5
+port explicitly, for example `bash flash_m5_bridge.sh /dev/cu.usbserial-XXXX`.
+
 ## Safety
 
 The Cyton uses high-torque DYNAMIXEL servos. Keep the work area clear, begin

@@ -32,5 +32,20 @@ V2 therefore:
 Bridge-generated messages start with `M5 ERR` (`queue_full_dropped`,
 `line_too_long`, `no_reply_timeout`, `stop_unacknowledged`).
 
-Flash with `pio run -t upload` from this directory (no switch to flip; the
-M5's own USB port is the one the host uses).
+## Flashing
+
+From the `cyton-robot-control` folder, with the M5 connected by USB, run:
+
+```bash
+bash flash_m5_bridge.sh
+```
+
+The script installs PlatformIO in the repository-local `.venv` when needed and
+uploads this firmware. If several serial devices are connected, specify the
+M5 port explicitly:
+
+```bash
+bash flash_m5_bridge.sh /dev/cu.usbserial-XXXXXXXX
+```
+
+There is no shield switch to flip; the M5's own USB port is the upload port.
