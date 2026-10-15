@@ -56,6 +56,19 @@ below for every trial.
 The saved constants replace the ring's active calibration. The CSV data stays
 on the computer and is ignored by Git.
 
+## Why additional calibration batches help
+
+Yes—each additional **complete three-trial batch** is averaged with the
+previous saved batches. Because the ring is removed and reseated between trials,
+small random placement differences tend to cancel out. In general, the random
+part of the error decreases roughly with the square root of the number of
+independent batches, so later batches still help but by smaller amounts.
+
+This only improves random error. It will not fix a repeated mistake, such as
+using the wrong arm pose or mounting the ring crooked in the same way every
+time. Keep using the fixture orientation shown above. If the ring or fixture is
+changed materially, clear the calibration history and start a new baseline.
+
 ## Reflash the M5 bridge
 
 Connect the M5StickC Plus by USB, then run this from `cyton-robot-control`:
