@@ -87,7 +87,7 @@ PRESET_HOME = {
     15: 250,
 }
 
-PRESET_USER_EXAMPLE = {
+PRESET_CALIBRATION = {
     8: 2048,
     9: 2048,
     10: 2048,
@@ -933,8 +933,8 @@ class VringCytonApp:
 
         ttk.Button(
             preset_frame,
-            text="Example (ID12 -90°)",
-            command=lambda: self.load_preset(PRESET_USER_EXAMPLE, name="Home + ID12 -90° [1060], gripper 400"),
+            text="Calibration Preset (ID12 -90°)",
+            command=lambda: self.load_preset(PRESET_CALIBRATION, name="Calibration Preset: ID12 -90° [1060], gripper 400"),
         ).pack(side="left", padx=3)
 
         ttk.Button(
