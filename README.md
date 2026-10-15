@@ -23,6 +23,23 @@ installs the required Python packages. The GUI connects to the arm over the M5
 USB serial bridge and to the ring over Bluetooth LE. See the calibration GUI
 README for wiring and safety notes.
 
+## Simple calibration steps
+
+1. Connect the M5 bridge to the computer by USB, power the arm, and put the
+   ring in the arm fixture. Keep the arm's work area clear.
+2. Run the setup and launch commands above.
+3. In the GUI, connect the Cyton serial gateway, scan for the VRing, and
+   connect to the correct ring.
+4. Confirm arm telemetry is healthy, enable torque, then click **New CSV**.
+5. Click **Run 6-Position Capture** three times. Each run waits for every arm
+   pose to settle, holds it for three seconds, and records the midpoint sample;
+   it also records the required gyro rotations.
+6. Click **Save 3-Trial Accel + Gyro Calibration to Ring**. The GUI validates
+   the three trials and writes the new calibration to the ring over Bluetooth.
+
+The saved constants replace the ring's active calibration. The CSV data stays
+on the computer and is ignored by Git.
+
 ## Reflash the M5 bridge
 
 Connect the M5StickC Plus by USB, then run this from `cyton-robot-control`:
