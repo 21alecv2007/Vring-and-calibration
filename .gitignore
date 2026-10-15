@@ -6,10 +6,9 @@
 **/.pio/
 **/.vscode/
 
-# Unity-generated caches and builds
-**/[Ll]ibrary/
-**/[Tt]emp/
-**/[Ll]ogs/
-**/[Uu]ser[Ss]ettings/
-**/[Bb]uild/
-**/[Bb]uilds/
+# Calibration runs create local data files. Keep them out of source commits;
+# export a specific result separately when it is useful to share.
+cyton-robot-control/outputs/vring_cyton_control/vring_calibration_*.csv
+cyton-robot-control/outputs/vring_cyton_control/vring_gyro_gain_*.csv
+cyton-robot-control/outputs/vring_cyton_control/vring_calibration_data.csv
+cyton-robot-control/outputs/vring_cyton_control/vring_calibration_history.json

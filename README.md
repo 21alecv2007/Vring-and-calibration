@@ -1,29 +1,28 @@
-# VRing and Cyton Calibration
+# VRing Arm Calibration
 
-This repository contains the software, firmware, schematics, and calibration
-records for a Robai Cyton robot arm and a VRing 2 Bluetooth sensor ring.
+This repository contains the minimum software, firmware, and wiring reference
+needed to calibrate a VRing 2 IMU using a Robai Cyton arm.
 
-## Project layout
+## What is included
 
-| Folder | Purpose |
+| Folder | Contents |
 |---|---|
-| `cyton-robot-control/` | Cyton arm gateway firmware, desktop control GUIs, IMU-calibration workflow, and recorded calibration data |
-| `vring2/` | VRing 2 firmware, BLE tools, calibration tester, block-sorter demo, and hardware schematics |
+| `cyton-robot-control/` | The desktop calibration GUI plus the Arduino Uno and M5StickC Plus firmware that move the arm safely |
+| `vring2/` | The VRing firmware, orientation filter, and current hardware schematic |
 
-## Start here
-
-To run the combined arm and ring controller on macOS:
+## Start the calibration GUI
 
 ```bash
 cd cyton-robot-control
 bash outputs/vring_cyton_control/launch_vring_gui.sh
 ```
 
-The ring firmware is `vring2/vring2.ino`. The arm controller and ring tools are
-described in their respective READMEs below.
+The GUI connects to the arm over the M5 USB serial bridge and to the ring over
+Bluetooth LE. See the calibration GUI README for wiring, setup, and safety
+notes.
 
 ## Safety
 
-The arm uses high-torque DYNAMIXEL servos. Begin with torque disabled, keep the
-arm clear of people and objects, and use the controller's STOP control before
-making wiring or mechanical changes.
+The Cyton uses high-torque DYNAMIXEL servos. Keep the work area clear, begin
+with torque disabled, and use the GUI's STOP control before touching wiring or
+the arm.

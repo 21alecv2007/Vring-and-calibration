@@ -1,87 +1,26 @@
-# VRING 2
-Designed for use in AR/VR systems, the VRING is meant to provide a convenient, all-day (if you wish), wireless, finger-worn input device for anything you can dream of.  Currently based on the Xiao NRF52840 platform, it has the following capabilities:
-* 6-axis IMU (gyro, accelerometer)
-* PDM Microphone
-* Temperature sensor
+# VRing 2 Firmware for Arm-Guided Calibration
 
-With minor modifications, it adds:
+This folder contains the ring firmware used by the calibration GUI.
 
-* Capacitive inputs (analog, to some extent) (1 per resistor)
-* Vibration output (with the addition of a transistor and vibration motor)
-
-The current software publishes the folowing characteristics at 100Hz, driven off the microphone reading:
-
-* Sensor Data
-  * Accelerometer X,Y,Z (2 bytes each, int16 scaled to the +/-16g range)
-  * Orientation quaternion X,Y,Z (2 bytes each, int16 scaled by 32767).  W is omitted and
-    reconstructed by the receiver as sqrt(1 - x^2 - y^2 - z^2); the firmware negates X,Y,Z
-    when needed so W is always positive.
-  * Capacitive Readings x 2 (2 bytes each)
-  * Battery Reading (2 bytes)
-  * Temperature Reading (2 bytes)
-  * Sample counter (2 bytes, uint16, wraps every ~164s).  Counts every IMU sample set pulled
-    from the FIFO, including sets drained but not transmitted.  The FIFO rate is a fixed 400Hz,
-    so sample time is `counter * 2.5ms` exactly.  BLE delivers 2-3 notifications per connection
-    interval, so packets arrive in bursts and arrival time is not sample time - use this field
-    to place samples in time.  A jump greater than 1 is data the receiver never got.  Appended
-    last, so the first 20 bytes keep their original offsets.
-* Microphone Data - Opus-encoded 16Khz with 160ms frame size (10ms).  
-* Vibration Control - 1 byte, indicating the vibration strength 0 - 255
-
-When disconnected and only advertising, it consumes ~ 100uA, and so for a 100 mAh battery (suggested), you get about 1000hrs standby time (roughly 1.5months).  
-
-When connected, it consumes 6-8 mA, yielding an expected continuous input of about 12 hours.
-
-Battery recharges in about 1 hr of the USB-C port.  
-
-The included HTML test page shows how to read all sensors (use Chrome, which has WebBLE).  
-
-`Screenshot 2026-09-21 at 4.48.37 PM.png` is the current ring wiring
-schematic, including the physical button connection.
-
-## Repository tools
-
-| File | Purpose |
+| File or folder | Purpose |
 |---|---|
-| `vring2.ino` | XIAO nRF52840 ring firmware: IMU, BLE sensor packets, haptics, and persistent BLE calibration storage |
-| `MadgwickAHRS.*` | Orientation fusion used by the firmware |
-| `ring_calibration_tester.py` | Pygame BLE diagnostic for live IMU values, fused angles, and drift experiments |
-| `ring_block_sorter.py` | Pygame ring-control demonstration |
-| `schematics/` | Circuit and hardware reference material |
+| `vring2.ino` | XIAO nRF52840 firmware: IMU sampling, BLE telemetry, haptics, button input, and persistent BLE calibration storage |
+| `MadgwickAHRS.cpp`, `MadgwickAHRS.h` | Orientation filter used by the firmware |
+| `schematics/` | Current as-built wiring diagram, including the D10 pushbutton |
 
-The arm-guided calibration workflow is in
-`../cyton-robot-control/outputs/vring_cyton_control`. After the firmware has
-been flashed with BLE calibration support, the controller can write new
-calibration constants to the ring without another flash.
+## Calibration connection
 
-To run either Python tool, install its desktop dependencies first:
+The arm calibration GUI is located at
+`../cyton-robot-control/outputs/vring_cyton_control`. It reads the ring over
+Bluetooth LE and writes calibration constants to the ring's internal storage.
+Once this firmware version has been flashed, later calibration runs do not
+require another ring flash.
 
-```bash
-python3 -m pip install pygame bleak
-python3 ring_calibration_tester.py
-# or: python3 ring_block_sorter.py
-```
+## Flashing requirements
 
-![PXL_20250527_182906354 MP](https://github.com/user-attachments/assets/aa3caed2-5041-4974-8955-8c3e75270c0c)
+Use a Seeed Studio XIAO nRF52840 Sense with the Bluefruit (non-mbed) Arduino
+core. The firmware also requires the Seeed LSM6DS3, Adafruit PDM, and
+arduino-libopus libraries.
 
-### Pin connections
-
-To avoid extra bulk, everything is soldered directly to the Xiao.  
-
-* Pin 0 -> MOSFET Gate (2N7000)
-* Pin 1 -> GND and MOSFET source (wasted for stability and convenience)
-* MOSFET Drain -> Vibration Motor +
-* Vibration Motor - VBat 
-* 1-MOhm resistors between pins 4 and 9 and 5 and 7 for capacitive sensing
-* 100mah battery hooked up underneath (directly soldered) to vbat +/-
-* Velcro strap hot glued to seal everything in place and make for an adjustable finger connection
-
-### Building
-
-You will need a few libraries:
-
-* Follow the Xiao guide for getting a basic sketch up and runnning: https://wiki.seeedstudio.com/XIAO_BLE/
-  * Note, use the Bluefruit core, non-mbed.  Mbed is very high power, and doesn't offer much.
-* Install arduino-libopus: https://github.com/pschatzmann/arduino-libopus
-* Follow the guide here to install the IMU library: https://wiki.seeedstudio.com/XIAO-BLE-Sense-IMU-Usage/
-* The PDM library from XIAO doesn't work with the non-mbed core.  Instead, install the PDM library from adafruit: https://github.com/adafruit/Adafruit_nRF52_Arduino (Xiao leverages a lot of adafruit, hence the Bluefruit stuff)
+See [the schematic](schematics/README.md) before connecting the battery,
+motor, touch electrodes, or button.
