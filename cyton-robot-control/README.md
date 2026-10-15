@@ -31,6 +31,22 @@ The script installs PlatformIO locally when needed, then builds and uploads the
 firmware in `outputs/m5_uart_bridge`. If automatic port selection cannot choose
 one device, pass the port as the first argument.
 
+## Reflash the Uno gateway
+
+1. Connect the Arduino Uno by USB.
+2. Set the DYNAMIXEL Shield UART switch to `UPLOAD`.
+3. Run:
+
+   ```bash
+   bash flash_uno_gateway.sh
+   ```
+
+4. When the upload succeeds, return the shield switch to `DYNAMIXEL` before
+   using the arm.
+
+The script installs PlatformIO locally if required and asks for confirmation
+immediately before the upload.
+
 Use the individual READMEs for the wiring and firmware-flashing steps. The
 gateway disables servo torque at boot; always confirm the arm is clear before
 enabling torque.

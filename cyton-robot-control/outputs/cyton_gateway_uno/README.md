@@ -21,6 +21,21 @@ V2 changes:
   rather than parsed.
 - `HELP` ends with `OK HELP`; `PING` answers `PONG CYTON_GATEWAY_V2`.
 
-Flashing: set the shield UART switch to `UPLOAD`, run `pio run -t upload`
-(add `--upload-port` if several boards are attached), then return the switch
-to `DYNAMIXEL` and press RESET once.
+## Flashing
+
+From the `cyton-robot-control` folder:
+
+1. Set the shield UART switch to `UPLOAD`.
+2. Connect the Uno over USB and run:
+
+   ```bash
+   bash flash_uno_gateway.sh
+   ```
+
+3. Return the shield UART switch to `DYNAMIXEL` and press RESET once.
+
+If several serial devices are connected, specify the Uno port explicitly:
+
+```bash
+bash flash_uno_gateway.sh /dev/cu.usbmodemXXXXXXXX
+```

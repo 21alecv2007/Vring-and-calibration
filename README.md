@@ -35,6 +35,18 @@ The script installs PlatformIO in the local `.venv` if necessary and uploads
 the bridge firmware. If more than one serial device is connected, give the M5
 port explicitly, for example `bash flash_m5_bridge.sh /dev/cu.usbserial-XXXX`.
 
+## Reflash the Uno gateway
+
+Connect the Arduino Uno by USB, set the DYNAMIXEL Shield UART switch to
+`UPLOAD`, then run this from `cyton-robot-control`:
+
+```bash
+bash flash_uno_gateway.sh
+```
+
+The script asks for a final confirmation before flashing. After a successful
+upload, return the shield switch to `DYNAMIXEL` before controlling the arm.
+
 ## Safety
 
 The Cyton uses high-torque DYNAMIXEL servos. Keep the work area clear, begin
