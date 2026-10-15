@@ -25,16 +25,26 @@ README for wiring and safety notes.
 
 ## Simple calibration steps
 
-1. Connect the M5 bridge to the computer by USB, power the arm, and put the
-   ring in the arm fixture. Keep the arm's work area clear.
+Before starting, flash the ring with the `vring2/vring2.ino` firmware from this
+repository. This version supports the BLE calibration data written by the GUI.
+
+> **Ring mounting photo:** add the upcoming fixture photo here. Mount the ring
+> in the same orientation shown in that photo for every trial.
+
+1. Connect the M5 bridge to the computer by USB, power the arm, and mount the
+   ring in the calibration fixture. Keep the arm's work area clear.
 2. Run the setup and launch commands above.
 3. In the GUI, connect the Cyton serial gateway, scan for the VRing, and
    connect to the correct ring.
 4. Confirm arm telemetry is healthy, enable torque, then click **New CSV**.
-5. Click **Run 6-Position Capture** three times. Each run waits for every arm
-   pose to settle, holds it for three seconds, and records the midpoint sample;
-   it also records the required gyro rotations.
-6. Click **Save 3-Trial Accel + Gyro Calibration to Ring**. The GUI validates
+5. Click **Run 6-Position Capture** once. Each run waits for every arm pose to
+   settle, holds it for three seconds, and records the midpoint sample; it also
+   records the required gyro rotations.
+6. Remove the ring from the fixture, then put it back in before starting the
+   next trial. This gives a slightly different real-world placement for the
+   three-trial average.
+7. Repeat steps 5–6 until there are three complete trials in the same CSV.
+8. Click **Save 3-Trial Accel + Gyro Calibration to Ring**. The GUI validates
    the three trials and writes the new calibration to the ring over Bluetooth.
 
 The saved constants replace the ring's active calibration. The CSV data stays
