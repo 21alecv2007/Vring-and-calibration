@@ -7,6 +7,27 @@ Mac USB Serial (115,200) -> M5StickC Bridge -> Arduino Uno Gateway -> DYNAMIXEL 
 Mac Bluetooth LE (CoreBluetooth) -> VRing 2 (XIAO nRF52840 + LSM6DS3 IMU)
 ```
 
+## M5-to-arm wiring
+
+Use the M5StickC Plus bottom HAT header. The Uno's DYNAMIXEL Shield owns the
+servo bus; the M5 only provides the computer-to-Uno serial bridge.
+
+```text
+M5 G26 (TX) --------------------------> Uno/shield software-UART RX (D7)
+
+Uno/shield software-UART TX (D8) -- 1 kOhm --+--> M5 G36 (RX)
+                                                |
+                                               2 kOhm
+                                                |
+M5 GND -----------------------------------------+---- Uno/shield GND
+```
+
+- The 1 kOhm / 2 kOhm divider lowers the Uno's 5 V TX signal to about 3.3 V
+  for the M5 input.
+- Do not connect M5 5 V, 3.3 V, BAT, or G0 to the Uno/shield.
+- Power the M5 over USB or from its battery, the Uno separately, and the
+  DYNAMIXEL chain from its dedicated regulated 12 V supply.
+
 ## Quick Start
 
 ```bash

@@ -36,6 +36,9 @@ Battery recharges in about 1 hr of the USB-C port.
 
 The included HTML test page shows how to read all sensors (use Chrome, which has WebBLE).  
 
+`Screenshot 2026-09-21 at 4.48.37 PM.png` is the current ring wiring
+schematic, including the physical button connection.
+
 ## Repository tools
 
 | File | Purpose |
@@ -82,4 +85,3 @@ You will need a few libraries:
 * Install arduino-libopus: https://github.com/pschatzmann/arduino-libopus
 * Follow the guide here to install the IMU library: https://wiki.seeedstudio.com/XIAO-BLE-Sense-IMU-Usage/
 * The PDM library from XIAO doesn't work with the non-mbed core.  Instead, install the PDM library from adafruit: https://github.com/adafruit/Adafruit_nRF52_Arduino (Xiao leverages a lot of adafruit, hence the Bluefruit stuff)
-
