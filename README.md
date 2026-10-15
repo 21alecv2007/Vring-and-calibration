@@ -33,12 +33,16 @@ below for every trial.
 
 ![VRing mounted in the Cyton calibration fixture](docs/images/calibration-ring-fixture.jpg)
 
-1. Connect the M5 bridge to the computer by USB, power the arm, and mount the
-   ring in the calibration fixture. Keep the arm's work area clear.
-2. Run the setup and launch commands above.
-3. In the GUI, connect the Cyton serial gateway, scan for the VRing, and
-   connect to the correct ring.
-4. Confirm arm telemetry is healthy, enable torque, then click **New CSV**.
+1. Connect the M5 bridge to the computer by USB, power the arm, and run the
+   setup and launch commands above. Keep the arm's work area clear.
+2. In the GUI, connect the Cyton serial gateway. Confirm arm telemetry is
+   healthy, enable torque, load **Calibration Preset (ID12 -90°)**, and execute
+   the preset move.
+3. **Only after the arm reaches the Calibration Preset**, mount the ring in the
+   fixture exactly as shown in the photo above. This position is required for
+   safe, repeatable mounting.
+4. Scan for the VRing in the GUI and connect to the correct ring, then click
+   **New CSV**.
 5. Click **Run 6-Position Capture** once. Each run waits for every arm pose to
    settle, holds it for three seconds, and records the midpoint sample; it also
    records the required gyro rotations.
