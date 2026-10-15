@@ -25,6 +25,21 @@ Computer USB serial (115,200 baud)
 Full hardware notes, wiring, the gateway command protocol, setup steps for each
 platform, and safety invariants are in [CLAUDE.md](CLAUDE.md).
 
+## VRing calibration controller
+
+`outputs/vring_cyton_control` combines the arm and VRing 2 over Bluetooth LE.
+It is the main tool for viewing live ring data, moving through the six-position
+accelerometer and gyro calibration routine, and saving calibration values to the
+ring. Run it from this directory:
+
+```bash
+bash outputs/vring_cyton_control/launch_vring_gui.sh
+```
+
+The GUI stores its calibration CSV files and local calibration history beside
+itself. The ring receives the resulting calibration constants over BLE, so a
+successful calibration does not require reflashing the ring.
+
 ## Quick start
 
 ```bash

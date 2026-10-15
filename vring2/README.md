@@ -36,6 +36,29 @@ Battery recharges in about 1 hr of the USB-C port.
 
 The included HTML test page shows how to read all sensors (use Chrome, which has WebBLE).  
 
+## Repository tools
+
+| File | Purpose |
+|---|---|
+| `vring2.ino` | XIAO nRF52840 ring firmware: IMU, BLE sensor packets, haptics, and persistent BLE calibration storage |
+| `MadgwickAHRS.*` | Orientation fusion used by the firmware |
+| `ring_calibration_tester.py` | Pygame BLE diagnostic for live IMU values, fused angles, and drift experiments |
+| `ring_block_sorter.py` | Pygame ring-control demonstration |
+| `schematics/` | Circuit and hardware reference material |
+
+The arm-guided calibration workflow is in
+`../cyton-robot-control/outputs/vring_cyton_control`. After the firmware has
+been flashed with BLE calibration support, the controller can write new
+calibration constants to the ring without another flash.
+
+To run either Python tool, install its desktop dependencies first:
+
+```bash
+python3 -m pip install pygame bleak
+python3 ring_calibration_tester.py
+# or: python3 ring_block_sorter.py
+```
+
 ![PXL_20250527_182906354 MP](https://github.com/user-attachments/assets/aa3caed2-5041-4974-8955-8c3e75270c0c)
 
 ### Pin connections
@@ -59,5 +82,4 @@ You will need a few libraries:
 * Install arduino-libopus: https://github.com/pschatzmann/arduino-libopus
 * Follow the guide here to install the IMU library: https://wiki.seeedstudio.com/XIAO-BLE-Sense-IMU-Usage/
 * The PDM library from XIAO doesn't work with the non-mbed core.  Instead, install the PDM library from adafruit: https://github.com/adafruit/Adafruit_nRF52_Arduino (Xiao leverages a lot of adafruit, hence the Bluefruit stuff)
-
 
