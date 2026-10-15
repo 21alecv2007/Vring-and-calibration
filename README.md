@@ -28,8 +28,10 @@ README for wiring and safety notes.
 Before starting, flash the ring with the `vring2/vring2.ino` firmware from this
 repository. This version supports the BLE calibration data written by the GUI.
 
-> **Ring mounting photo:** add the upcoming fixture photo here. Mount the ring
-> in the same orientation shown in that photo for every trial.
+**Ring mounting orientation:** mount the ring in the fixture exactly as shown
+below for every trial.
+
+![VRing mounted in the Cyton calibration fixture](docs/images/calibration-ring-fixture.jpg)
 
 1. Connect the M5 bridge to the computer by USB, power the arm, and mount the
    ring in the calibration fixture. Keep the arm's work area clear.
